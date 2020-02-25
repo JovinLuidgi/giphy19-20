@@ -7,12 +7,17 @@ $('h1').click(function(){
     $('h1').text('Ready to Code');
 });
 $("button").click(function(){
-search = $("input").val;
-fetch("https://api.giphy.com/v1/gifs/search?q="+search+"&rating=pg&api_key=rQrXp8Skecms5IYqoh0BS4HeQW9L35LY")
+search = $("input").val();
+picNum = Math.floor(Math.random() * 11);
+url = "https://api.giphy.com/v1/gifs/search?q="+search+"&limit=10&rating=pg&api_key=rQrXp8Skecms5IYqoh0BS4HeQW9L35LY"
+console.log(url);
+fetch(url)
     .then(function(response) {
         return response.json();
     })
     .then(function(data) {
-        $(".results").append("<img src='"+ data.data[0].embed_url+"'>")
+        $(".results").html("<div></div>")
+        $(".results").append("<img src='" + data.data[picNum].images.original.url + "'>")
+        console.log(search);
     })
 });
